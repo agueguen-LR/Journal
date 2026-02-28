@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Journal" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.Journal" parent="Theme.AppCompat.DayNight.NoActionBar">
+
+        <!-- Core -->
+        <item name="colorPrimary">@color/latte_surface0</item>
+        <item name="colorPrimaryDark">@color/latte_surface1</item>
+        <item name="colorAccent">@color/latte_mauve</item>
+
+        <!-- Window -->
+        <item name="android:windowBackground">@color/latte_base</item>
+        <item name="android:statusBarColor">@color/latte_surface1</item>
+        <item name="android:navigationBarColor">@color/latte_surface1</item>
+
+        <!-- Text -->
+        <item name="android:textColorPrimary">@color/latte_text</item>
+        <item name="android:textColorSecondary">@color/latte_subtext1</item>
+
+        <!-- Backgrounds -->
+        <item name="android:colorBackground">@color/latte_base</item>
+        <item name="android:colorForeground">@color/latte_text</item>
+
+        <!-- Controls -->
+        <item name="colorButtonNormal">@color/latte_surface0</item>
+        <item name="colorControlActivated">@color/latte_mauve</item>
+        <item name="colorControlHighlight">@color/latte_overlay0</item>
+
+    </style>
+
+
 </resources>

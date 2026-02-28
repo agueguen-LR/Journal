@@ -1,10 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- ===== Latte Base Palette ===== -->
+
+    <color name="latte_rosewater">#DC8A78</color>
+    <color name="latte_flamingo">#DD7878</color>
+    <color name="latte_pink">#EA76CB</color>
+    <color name="latte_mauve">#8839EF</color>
+    <color name="latte_red">#D20F39</color>
+    <color name="latte_maroon">#E64553</color>
+    <color name="latte_peach">#FE640B</color>
+    <color name="latte_yellow">#DF8E1D</color>
+    <color name="latte_green">#40A02B</color>
+    <color name="latte_teal">#179299</color>
+    <color name="latte_sky">#04A5E5</color>
+    <color name="latte_sapphire">#209FB5</color>
+    <color name="latte_blue">#1E66F5</color>
+    <color name="latte_lavender">#7287FD</color>
+
+    <!-- ===== Text ===== -->
+
+    <color name="latte_text">#4C4F69</color>
+    <color name="latte_subtext1">#5C5F77</color>
+    <color name="latte_subtext0">#6C6F85</color>
+
+    <!-- ===== Surfaces ===== -->
+
+    <color name="latte_overlay2">#7C7F93</color>
+    <color name="latte_overlay1">#8C8FA1</color>
+    <color name="latte_overlay0">#9CA0B0</color>
+
+    <color name="latte_surface2">#ACB0BE</color>
+    <color name="latte_surface1">#BCC0CC</color>
+    <color name="latte_surface0">#CCD0DA</color>
+
+    <!-- ===== Base Layers ===== -->
+
+    <color name="latte_base">#EFF1F5</color>
+    <color name="latte_mantle">#E6E9EF</color>
+    <color name="latte_crust">#DCE0E8</color>
 </resources>

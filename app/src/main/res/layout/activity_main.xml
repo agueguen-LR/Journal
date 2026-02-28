@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<Space
+		android:layout_width="match_parent"
+		android:layout_height="40dp" />
+
+	<EditText
+		android:id="@+id/titre"
+		android:layout_width="match_parent"
+		android:layout_height="48dp"
+		android:hint="@string/enter_title_hint" />
+
+	<EditText
+		android:id="@+id/contenu"
+		android:layout_width="match_parent"
+		android:layout_height="48dp"
+		android:hint="@string/enter_content_hint" />
+
+
+	<TextView
+		android:id="@+id/date"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:hint="@string/select_date_hint"
+		android:textSize="22sp" />
+
+	<CheckBox
+		android:id="@+id/tag"
+		android:layout_width="match_parent"
+		android:layout_height="48dp"
+		android:text="Tag" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="48dp"
+		android:orientation="horizontal">
+
+		<Space
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1" />
+
+		<Button
+			android:id="@+id/button"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:text="@string/save_button" />
+
+		<Space
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1" />
+	</LinearLayout>
+
+	<ListView
+		android:id="@+id/list"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:fastScrollEnabled="true" />
+
+</LinearLayout>

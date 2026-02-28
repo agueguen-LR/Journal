@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="latte_base">#1E1E2E</color>
+    <color name="latte_surface0">#313244</color>
+    <color name="latte_surface1">#45475A</color>
+    <color name="latte_overlay0">#6C7086</color>
+    <color name="latte_text">#CDD6F4</color>
+    <color name="latte_subtext1">#BAC2DE</color>
+    <color name="latte_mauve">#CBA6F7</color>
+
+</resources>
