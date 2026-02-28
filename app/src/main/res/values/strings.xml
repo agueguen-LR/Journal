@@ -4,4 +4,7 @@
     <string name="enter_content_hint">Content</string>
     <string name="select_date_hint">Select date</string>
     <string name="save_button">Save</string>
+    <string name="confirm_delete">Delete this journal entry?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

@@ -1,8 +1,10 @@
 package com.agueguen.journal
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.ComponentActivity
 import com.agueguen.journal.databinding.ActivityMainBinding
 
@@ -13,6 +15,7 @@ class MainActivity : ComponentActivity() {
     var month = calendar.get(Calendar.MONTH)
     var year = calendar.get(Calendar.YEAR)
     var list = ArrayList<JournalEntry>()
+    lateinit var adapter: JournalArrayAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +40,7 @@ class MainActivity : ComponentActivity() {
             ).show()
         }
 
-        val adapter = JournalArrayAdapter(
+        this.adapter = JournalArrayAdapter(
             this,
             R.layout.journal_entry,
             R.id.textViewItem,
@@ -52,9 +55,31 @@ class MainActivity : ComponentActivity() {
                 "${day}/${month+1}/${year}",
                 binding.tag.isChecked()
             )
-            database.getData(this.list, null, null)
-            adapter.notifyDataSetChanged()
+            updateEntries(this.adapter)
         }
+    }
+
+    fun showDeleteConfirmationDialog(deletedElementId: Int) {
+        val builder = AlertDialog.Builder(this)
+        val dialogView = layoutInflater.inflate(R.layout.confirm_delete, null)
+
+        builder.setView(dialogView).setCancelable(true)
+        val dialog = builder.create()
+        dialogView.findViewById<Button>(R.id.yes).setOnClickListener {
+            database.deleteData(deletedElementId)
+            updateEntries(adapter)
+            dialog.dismiss()
+        }
+        dialogView.findViewById<Button>(R.id.no).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun updateEntries(adapter: JournalArrayAdapter){
+        database.getData(this.list, null, null)
+        adapter.notifyDataSetChanged()
     }
 
 }

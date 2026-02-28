@@ -5,4 +5,7 @@
     <string name="enter_content_hint">Contenu</string>
     <string name="select_date_hint">Sélectionnez la date</string>
     <string name="save_button">Enregistrer</string>
+    <string name="confirm_delete">Supprimer cet élément?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
 </resources>

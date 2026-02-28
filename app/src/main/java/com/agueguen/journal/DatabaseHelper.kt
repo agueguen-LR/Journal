@@ -33,6 +33,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "JournalDB", 
                 "VALUES('${title}', '${content}', '${date}', ${tag})")
     }
 
+    fun deleteData(id: Int){
+        this.writableDatabase.execSQL("DELETE FROM JournalDB WHERE id = $id")
+    }
+
     @SuppressLint("Range")
     fun getData(list: ArrayList<JournalEntry>, orderBy: DatabaseHelper.COLUMNS?, having: String?) {
         list.clear()
@@ -46,6 +50,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "JournalDB", 
         if (cursor.moveToFirst()){
             do {
                 val journalEntry = JournalEntry(
+                    cursor.getInt(cursor.getColumnIndex("id")),
                     cursor.getString(cursor.getColumnIndex("title")),
                     cursor.getString(cursor.getColumnIndex("content")),
                     cursor.getString(cursor.getColumnIndex("date")),

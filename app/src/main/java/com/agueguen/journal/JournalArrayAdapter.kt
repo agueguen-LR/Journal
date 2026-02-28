@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
+import android.widget.Spinner
 import android.widget.Toast
 
 class JournalArrayAdapter(
@@ -31,6 +32,23 @@ class JournalArrayAdapter(
 
         clickContainer.setOnLongClickListener {
             Log.i("JournalEntryAdapter", "Long click at $position")
+            val mainActivity = (this.context as MainActivity)
+            val spinner = view.findViewById<Spinner>(R.id.spinner)
+            val spinnerEntries = mainActivity.resources.getStringArray(R.array.spinner_entries)
+            when (spinner.selectedItem) {
+                // modify
+                spinnerEntries[0] -> {
+
+                }
+                // edit
+                spinnerEntries[1] -> {
+
+                }
+                // delete
+                spinnerEntries[2] -> {
+                    mainActivity.showDeleteConfirmationDialog(getItem(position)!!.id)
+                }
+            }
             true
         }
 
