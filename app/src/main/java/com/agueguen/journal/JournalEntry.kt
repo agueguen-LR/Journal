@@ -1,7 +1,7 @@
 package com.agueguen.journal
 
-class JournalEntry(val titre: String, val contenu: String, val date: String, val tag: Boolean) {
+class JournalEntry(val title: String, val content: String, val date: String, val tag: Boolean) {
 	override fun toString(): String {
-		return "$titre - $date"
+		return "$title - $date"
 	}
 }

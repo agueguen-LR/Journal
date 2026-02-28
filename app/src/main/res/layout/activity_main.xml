@@ -9,13 +9,13 @@
 		android:layout_height="40dp" />
 
 	<EditText
-		android:id="@+id/titre"
+		android:id="@+id/title"
 		android:layout_width="match_parent"
 		android:layout_height="48dp"
 		android:hint="@string/enter_title_hint" />
 
 	<EditText
-		android:id="@+id/contenu"
+		android:id="@+id/content"
 		android:layout_width="match_parent"
 		android:layout_height="48dp"
 		android:hint="@string/enter_content_hint" />
