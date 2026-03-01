@@ -9,12 +9,12 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
-import androidx.activity.ComponentActivity
+import android.app.Activity
 import com.agueguen.journal.databinding.ActivityMainBinding
 
-class MainActivity : ComponentActivity() {
+class MainActivity : Activity() {
     val calendar: Calendar = Calendar.getInstance()
-    val database = DatabaseHelper(this)
+    lateinit var database : DatabaseHelper
     var day = calendar.get(Calendar.DAY_OF_MONTH)
     var month = calendar.get(Calendar.MONTH)
     var year = calendar.get(Calendar.YEAR)
@@ -30,6 +30,7 @@ class MainActivity : ComponentActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        database = DatabaseHelper(this)
         database.getData(list, null, null)
 
         binding.date.setOnClickListener {
@@ -55,7 +56,6 @@ class MainActivity : ComponentActivity() {
         )
         binding.list.adapter = adapter
 
-        val spinnerEntries = this.resources.getStringArray(R.array.search_spinner_entries)
         binding.searchSpinner.onItemSelectedListener = SearchSpinnerItemSelectedListener(this)
         binding.searchBar.addTextChangedListener(SearchBarTextWatcher(this))
 
