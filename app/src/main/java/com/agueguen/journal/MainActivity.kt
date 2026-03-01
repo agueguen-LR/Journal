@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -18,6 +19,8 @@ class MainActivity : ComponentActivity() {
     var month = calendar.get(Calendar.MONTH)
     var year = calendar.get(Calendar.YEAR)
     var list = ArrayList<JournalEntry>()
+    var filterSelection : String? = null
+    var filterColumn: DatabaseHelper.COLUMNS? = null
     lateinit var adapter: JournalArrayAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +29,7 @@ class MainActivity : ComponentActivity() {
         val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        database.getData(list, null, null, null)
+        database.getData(list, null, null)
 
         binding.date.setOnClickListener {
             DatePickerDialog(
@@ -51,16 +54,31 @@ class MainActivity : ComponentActivity() {
         )
         binding.list.adapter = adapter
 
+        val spinnerEntries = this.resources.getStringArray(R.array.search_spinner_entries)
+        when (binding.searchSpinner.selectedItem) {
+            //title
+            spinnerEntries[0] -> {
+                binding.searchBar.hint = this.resources.getString(R.string.search) +
+                        " " + this.resources.getString(R.string.title)
+                filterColumn = DatabaseHelper.COLUMNS.TITLE
+                binding.searchBar.addTextChangedListener(
+                    SearchBarTextWatcher(this)
+                )
+            }
+        }
+
         binding.button.setOnClickListener {
             database.insertData(
                 "${binding.title.text}",
                 "${binding.content.text}",
                 "${day}/${month+1}/${year}",
-                binding.tag.isChecked()
+                binding.tag.isChecked
             )
-            updateEntries(this.adapter)
+            updateEntries(this.adapter, filterSelection, filterColumn)
         }
     }
+
+
 
     fun showDeleteConfirmationDialog(deletedElementId: Int) {
         val builder = AlertDialog.Builder(this)
@@ -70,7 +88,7 @@ class MainActivity : ComponentActivity() {
         val dialog = builder.create()
         dialogView.findViewById<Button>(R.id.yes).setOnClickListener {
             database.deleteData(deletedElementId)
-            updateEntries(adapter)
+            updateEntries(this.adapter, filterSelection, filterColumn)
             dialog.dismiss()
         }
         dialogView.findViewById<Button>(R.id.no).setOnClickListener {
@@ -88,7 +106,7 @@ class MainActivity : ComponentActivity() {
         builder.setView(dialogView).setCancelable(true)
 
         val entry = ArrayList<JournalEntry>()
-        database.getData(entry,"id = $id", null, null)
+        database.getData(entry,"id = $id", null)
         dialogView.findViewById<TextView>(R.id.view_title).text = entry[0].title
         dialogView.findViewById<TextView>(R.id.view_content).text = entry[0].content
         dialogView.findViewById<CheckBox>(R.id.view_tag).setChecked(entry[0].tag)
@@ -108,7 +126,7 @@ class MainActivity : ComponentActivity() {
         builder.setView(dialogView).setCancelable(true)
 
         val entry = ArrayList<JournalEntry>()
-        database.getData(entry,"id = $id", null, null)
+        database.getData(entry,"id = $id", null)
         val title = dialogView.findViewById<EditText>(R.id.edit_title)
         title.setText(entry[0].title)
         val content = dialogView.findViewById<EditText>(R.id.edit_content)
@@ -138,16 +156,17 @@ class MainActivity : ComponentActivity() {
                 "${content.text}",
                 "${date.text}",
                 tag.isChecked)
-            updateEntries(this.adapter)
+            updateEntries(this.adapter, filterSelection, filterColumn)
+            Log.i("Main Activity", "$filterSelection")
             dialog.dismiss()
         }
 
         dialog.show()
     }
 
-    private fun updateEntries(adapter: JournalArrayAdapter){
+    fun updateEntries(adapter: JournalArrayAdapter, selection: String?, orderBy: DatabaseHelper.COLUMNS?){
         this.list.clear()
-        database.getData(this.list, null, null, null)
+        database.getData(this.list, selection, orderBy)
         adapter.notifyDataSetChanged()
     }
 

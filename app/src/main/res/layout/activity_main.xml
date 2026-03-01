@@ -12,13 +12,13 @@
 		android:id="@+id/title"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:hint="@string/enter_title_hint" />
+		android:hint="@string/title" />
 
 	<EditText
 		android:id="@+id/content"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:hint="@string/enter_content_hint" />
+		android:hint="@string/content" />
 
 
 	<TextView
@@ -55,6 +55,27 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1" />
 	</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="@string/search" />
+
+        <Spinner
+            android:id="@+id/search_spinner"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:entries="@array/search_spinner_entries" />
+
+    </LinearLayout>
 
 	<ListView
 		android:id="@+id/list"

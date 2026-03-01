@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="search_spinner_entries">
+		<item>Titre</item>
+		<item>Contenu</item>
+		<item>Date</item>
+        <item>Tag</item>
+	</string-array>
+</resources>

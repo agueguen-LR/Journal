@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string-array name="spinner_entries">
+	<string-array name="entry_spinner_entries">
 		<item>Details</item>
 		<item>Modify</item>
 		<item>Delete</item>

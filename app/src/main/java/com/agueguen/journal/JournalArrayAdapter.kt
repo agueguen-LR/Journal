@@ -33,8 +33,8 @@ class JournalArrayAdapter(
         clickContainer.setOnLongClickListener {
             Log.i("JournalEntryAdapter", "Long click at $position")
             val mainActivity = (this.context as MainActivity)
-            val spinner = view.findViewById<Spinner>(R.id.spinner)
-            val spinnerEntries = mainActivity.resources.getStringArray(R.array.spinner_entries)
+            val spinner = view.findViewById<Spinner>(R.id.entry_spinner)
+            val spinnerEntries = mainActivity.resources.getStringArray(R.array.entry_spinner_entries)
             when (spinner.selectedItem) {
                 // modify
                 spinnerEntries[0] -> {

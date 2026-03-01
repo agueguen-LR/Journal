@@ -49,8 +49,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "JournalDB", 
     @SuppressLint("Range")
     fun getData(list: ArrayList<JournalEntry>,
                 selection: String?,
-                orderBy: DatabaseHelper.COLUMNS?,
-                having: String?)
+                orderBy: DatabaseHelper.COLUMNS?)
     {
         if (!list.isEmpty()){
             Log.w("DatabaseHelper", "Attempted to getData into non-empty list")
@@ -61,7 +60,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "JournalDB", 
             selection,
             null,
             null,
-            having,
+            null,
             "$orderBy")
         if (cursor.moveToFirst()){
             do {
