@@ -6,6 +6,7 @@ import android.icu.util.Calendar
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import com.agueguen.journal.databinding.ActivityMainBinding
@@ -93,6 +94,51 @@ class MainActivity : ComponentActivity() {
         dialogView.findViewById<CheckBox>(R.id.view_tag).setChecked(entry[0].tag)
         val dialog = builder.create()
         dialogView.findViewById<Button>(R.id.view_exit_button).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+
+    fun showEditEntryDialog(id: Int) {
+        val builder = AlertDialog.Builder(this)
+        val dialogView = layoutInflater.inflate(R.layout.edit_journal_entry, null)
+
+        builder.setView(dialogView).setCancelable(true)
+
+        val entry = ArrayList<JournalEntry>()
+        database.getData(entry,"id = $id", null, null)
+        val title = dialogView.findViewById<EditText>(R.id.edit_title)
+        title.setText(entry[0].title)
+        val content = dialogView.findViewById<EditText>(R.id.edit_content)
+        content.setText(entry[0].content)
+        val date = dialogView.findViewById<TextView>(R.id.edit_date)
+        date.text = entry[0].date
+        date.setOnClickListener {
+            DatePickerDialog(
+                this,
+                { view, year, month, day ->
+                    this.year = year
+                    this.month = month
+                    this.day = day
+                    date.text = "$day/${month + 1}/$year"
+                },
+                year,
+                month,
+                day,
+            ).show()
+        }
+        val tag = dialogView.findViewById<CheckBox>(R.id.edit_tag)
+        tag.setChecked(entry[0].tag)
+        val dialog = builder.create()
+        dialogView.findViewById<Button>(R.id.edit_exit_button).setOnClickListener {
+            database.editData(id,
+                "${title.text}",
+                "${content.text}",
+                "${date.text}",
+                tag.isChecked)
+            updateEntries(this.adapter)
             dialog.dismiss()
         }
 

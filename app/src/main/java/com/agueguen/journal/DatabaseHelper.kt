@@ -37,6 +37,15 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "JournalDB", 
         this.writableDatabase.execSQL("DELETE FROM JournalDB WHERE id = $id")
     }
 
+    fun editData(id: Int, title: String, content: String, date: String, tag: Boolean){
+        this.writableDatabase.execSQL("UPDATE JournalDB SET " +
+                "title = '$title'," +
+                "content = '$content'," +
+                "date = '$date'," +
+                "tag = $tag " +
+                "WHERE id = $id")
+    }
+
     @SuppressLint("Range")
     fun getData(list: ArrayList<JournalEntry>,
                 selection: String?,

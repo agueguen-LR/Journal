@@ -42,7 +42,7 @@ class JournalArrayAdapter(
                 }
                 // edit
                 spinnerEntries[1] -> {
-
+                    mainActivity.showEditEntryDialog(getItem(position)!!.id)
                 }
                 // delete
                 spinnerEntries[2] -> {
