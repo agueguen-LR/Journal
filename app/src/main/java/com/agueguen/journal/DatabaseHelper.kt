@@ -38,11 +38,18 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "JournalDB", 
     }
 
     @SuppressLint("Range")
-    fun getData(list: ArrayList<JournalEntry>, orderBy: DatabaseHelper.COLUMNS?, having: String?) {
-        list.clear()
+    fun getData(list: ArrayList<JournalEntry>,
+                selection: String?,
+                orderBy: DatabaseHelper.COLUMNS?,
+                having: String?)
+    {
+        if (!list.isEmpty()){
+            Log.w("DatabaseHelper", "Attempted to getData into non-empty list")
+            return
+        }
         val cursor = this.readableDatabase.query("JournalDB",
             null,
-            null,
+            selection,
             null,
             null,
             having,

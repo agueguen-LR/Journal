@@ -38,7 +38,7 @@ class JournalArrayAdapter(
             when (spinner.selectedItem) {
                 // modify
                 spinnerEntries[0] -> {
-
+                    mainActivity.showViewEntryDialog(getItem(position)!!.id)
                 }
                 // edit
                 spinnerEntries[1] -> {

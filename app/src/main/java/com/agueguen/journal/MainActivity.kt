@@ -5,6 +5,8 @@ import android.app.DatePickerDialog
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import com.agueguen.journal.databinding.ActivityMainBinding
 
@@ -23,7 +25,7 @@ class MainActivity : ComponentActivity() {
         val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        database.getData(list, null, null)
+        database.getData(list, null, null, null)
 
         binding.date.setOnClickListener {
             DatePickerDialog(
@@ -77,8 +79,29 @@ class MainActivity : ComponentActivity() {
         dialog.show()
     }
 
+
+    fun showViewEntryDialog(id: Int) {
+        val builder = AlertDialog.Builder(this)
+        val dialogView = layoutInflater.inflate(R.layout.view_journal_entry, null)
+
+        builder.setView(dialogView).setCancelable(true)
+
+        val entry = ArrayList<JournalEntry>()
+        database.getData(entry,"id = $id", null, null)
+        dialogView.findViewById<TextView>(R.id.view_title).text = entry[0].title
+        dialogView.findViewById<TextView>(R.id.view_content).text = entry[0].content
+        dialogView.findViewById<CheckBox>(R.id.view_tag).setChecked(entry[0].tag)
+        val dialog = builder.create()
+        dialogView.findViewById<Button>(R.id.view_exit_button).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
     private fun updateEntries(adapter: JournalArrayAdapter){
-        database.getData(this.list, null, null)
+        this.list.clear()
+        database.getData(this.list, null, null, null)
         adapter.notifyDataSetChanged()
     }
 
