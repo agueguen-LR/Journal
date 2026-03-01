@@ -22,11 +22,12 @@ class MainActivity : ComponentActivity() {
     var filterSelection : String? = null
     var filterColumn: DatabaseHelper.COLUMNS? = null
     lateinit var adapter: JournalArrayAdapter
+    lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         database.getData(list, null, null)
@@ -55,17 +56,8 @@ class MainActivity : ComponentActivity() {
         binding.list.adapter = adapter
 
         val spinnerEntries = this.resources.getStringArray(R.array.search_spinner_entries)
-        when (binding.searchSpinner.selectedItem) {
-            //title
-            spinnerEntries[0] -> {
-                binding.searchBar.hint = this.resources.getString(R.string.search) +
-                        " " + this.resources.getString(R.string.title)
-                filterColumn = DatabaseHelper.COLUMNS.TITLE
-                binding.searchBar.addTextChangedListener(
-                    SearchBarTextWatcher(this)
-                )
-            }
-        }
+        binding.searchSpinner.onItemSelectedListener = SearchSpinnerItemSelectedListener(this)
+        binding.searchBar.addTextChangedListener(SearchBarTextWatcher(this))
 
         binding.button.setOnClickListener {
             database.insertData(
